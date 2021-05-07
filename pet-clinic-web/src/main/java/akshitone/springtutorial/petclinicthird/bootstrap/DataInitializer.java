@@ -1,11 +1,9 @@
 package akshitone.springtutorial.petclinicthird.bootstrap;
 
-import akshitone.springtutorial.petclinicthird.model.Owner;
-import akshitone.springtutorial.petclinicthird.model.Pet;
-import akshitone.springtutorial.petclinicthird.model.PetType;
-import akshitone.springtutorial.petclinicthird.model.Vet;
+import akshitone.springtutorial.petclinicthird.model.*;
 import akshitone.springtutorial.petclinicthird.services.OwnerService;
 import akshitone.springtutorial.petclinicthird.services.PetTypeService;
+import akshitone.springtutorial.petclinicthird.services.SpecialityService;
 import akshitone.springtutorial.petclinicthird.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,15 +15,37 @@ public class DataInitializer implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
+    private final SpecialityService specialityService;
 
-    public DataInitializer(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
+    public DataInitializer(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
+        this.specialityService = specialityService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        int countPetType = petTypeService.findAll().size();
+        if (countPetType == 0)
+            initializeData();
+    }
+
+    private void initializeData() {
+        Speciality heart = new Speciality();
+        heart.setDescription("Heart special");
+        Speciality heartSpeciality = specialityService.save(heart);
+
+        Speciality eye = new Speciality();
+        heart.setDescription("Eye special");
+        Speciality eyeSpeciality = specialityService.save(heart);
+
+        Speciality ear = new Speciality();
+        heart.setDescription("Ear special");
+        Speciality earSpeciality = specialityService.save(heart);
+
+        System.out.println("Loaded specialities data...");
+
         PetType dog = new PetType();
         dog.setName("Dog");
         PetType savedDogPetType = petTypeService.save(dog);
@@ -75,11 +95,16 @@ public class DataInitializer implements CommandLineRunner {
         Vet omen = new Vet();
         omen.setFirstName("Omen");
         omen.setLastName("Teleport");
+        omen.getSpecialities().add(heartSpeciality);
+        omen.getSpecialities().add(eyeSpeciality);
+
         vetService.save(omen);
 
         Vet phoenix = new Vet();
         phoenix.setFirstName("Phoenix");
         phoenix.setLastName("Explosive");
+        phoenix.getSpecialities().add(earSpeciality);
+
         vetService.save(phoenix);
 
         System.out.println("Loaded vets data...");
