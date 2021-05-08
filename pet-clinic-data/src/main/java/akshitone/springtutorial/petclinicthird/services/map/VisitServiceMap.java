@@ -1,7 +1,7 @@
 package akshitone.springtutorial.petclinicthird.services.map;
 
-import akshitone.springtutorial.petclinicthird.model.PetType;
-import akshitone.springtutorial.petclinicthird.services.PetTypeService;
+import akshitone.springtutorial.petclinicthird.model.Visit;
+import akshitone.springtutorial.petclinicthird.services.VisitService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -9,25 +9,25 @@ import java.util.Set;
 
 @Service
 @Profile({"default", "map"})
-public class PetTypeServiceMap extends AbstractMapService<PetType,Long> implements PetTypeService {
+public class VisitServiceMap extends AbstractMapService<Visit,Long> implements VisitService {
     @Override
-    public Set<PetType> findAll() {
+    public Set<Visit> findAll() {
         return super.findAll();
     }
 
     @Override
-    public PetType findById(Long id) {
+    public Visit findById(Long id) {
         return super.findById(id);
     }
 
     @Override
-    public PetType save(PetType petType) {
-        return super.save(petType);
+    public Visit save(Visit visit) {
+        return super.save(visit);
     }
 
     @Override
-    public void delete(PetType petType) {
-        super.delete(petType);
+    public void delete(Visit visit) {
+        super.delete(visit);
     }
 
     @Override

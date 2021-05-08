@@ -1,10 +1,7 @@
 package akshitone.springtutorial.petclinicthird.bootstrap;
 
 import akshitone.springtutorial.petclinicthird.model.*;
-import akshitone.springtutorial.petclinicthird.services.OwnerService;
-import akshitone.springtutorial.petclinicthird.services.PetTypeService;
-import akshitone.springtutorial.petclinicthird.services.SpecialityService;
-import akshitone.springtutorial.petclinicthird.services.VetService;
+import akshitone.springtutorial.petclinicthird.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +13,14 @@ public class DataInitializer implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
-    public DataInitializer(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataInitializer(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -38,11 +37,11 @@ public class DataInitializer implements CommandLineRunner {
 
         Speciality eye = new Speciality();
         heart.setDescription("Eye special");
-        Speciality eyeSpeciality = specialityService.save(heart);
+        Speciality eyeSpeciality = specialityService.save(eye);
 
         Speciality ear = new Speciality();
         heart.setDescription("Ear special");
-        Speciality earSpeciality = specialityService.save(heart);
+        Speciality earSpeciality = specialityService.save(ear);
 
         System.out.println("Loaded specialities data...");
 
@@ -89,6 +88,13 @@ public class DataInitializer implements CommandLineRunner {
         chloe.getPets().add(chloePet);
 
         ownerService.save(chloe);
+
+        Visit oreoVisit = new Visit();
+        oreoVisit.setPet(chloePet);
+        oreoVisit.setDate(LocalDate.now());
+        oreoVisit.setDescription("Smelly cat");
+
+        visitService.save(oreoVisit);
 
         System.out.println("Loaded owners data...");
 

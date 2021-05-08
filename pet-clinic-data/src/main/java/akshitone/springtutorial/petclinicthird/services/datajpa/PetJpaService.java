@@ -3,12 +3,14 @@ package akshitone.springtutorial.petclinicthird.services.datajpa;
 import akshitone.springtutorial.petclinicthird.model.Pet;
 import akshitone.springtutorial.petclinicthird.repositories.PetRepository;
 import akshitone.springtutorial.petclinicthird.services.PetService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Profile("datajpa")
 public class PetJpaService implements PetService {
     private final PetRepository petRepository;
 

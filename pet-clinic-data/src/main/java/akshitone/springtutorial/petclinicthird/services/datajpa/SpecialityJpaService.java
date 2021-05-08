@@ -3,12 +3,14 @@ package akshitone.springtutorial.petclinicthird.services.datajpa;
 import akshitone.springtutorial.petclinicthird.model.Speciality;
 import akshitone.springtutorial.petclinicthird.repositories.SpecialityRepository;
 import akshitone.springtutorial.petclinicthird.services.SpecialityService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Profile("datajpa")
 public class SpecialityJpaService implements SpecialityService {
     private final SpecialityRepository specialityRepository;
 

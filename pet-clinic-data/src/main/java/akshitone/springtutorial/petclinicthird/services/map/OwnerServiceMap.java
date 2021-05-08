@@ -5,11 +5,13 @@ import akshitone.springtutorial.petclinicthird.model.Pet;
 import akshitone.springtutorial.petclinicthird.services.OwnerService;
 import akshitone.springtutorial.petclinicthird.services.PetService;
 import akshitone.springtutorial.petclinicthird.services.PetTypeService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "map"})
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
     private final PetTypeService petTypeService;
     private final PetService petService;
@@ -42,7 +44,7 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
                             throw new RuntimeException("Pet type is required");
                         }
                     }
-                    if (pet.getId() == null){
+                    if (pet.getId() == null) {
                         Pet savedPet = petService.save(pet);
                         pet.setId(savedPet.getId());
                     }

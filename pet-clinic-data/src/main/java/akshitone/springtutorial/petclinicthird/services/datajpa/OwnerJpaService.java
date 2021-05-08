@@ -5,12 +5,14 @@ import akshitone.springtutorial.petclinicthird.repositories.OwnerRepository;
 import akshitone.springtutorial.petclinicthird.repositories.PetRepository;
 import akshitone.springtutorial.petclinicthird.repositories.PetTypeRepository;
 import akshitone.springtutorial.petclinicthird.services.OwnerService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Profile("datajpa")
 public class OwnerJpaService implements OwnerService {
     private final OwnerRepository ownerRepository;
     private final PetRepository petRepository;
